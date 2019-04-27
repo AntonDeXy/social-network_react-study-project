@@ -1,0 +1,46 @@
+*{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.app-wrapper{
+  display: grid;
+  width: 80%;
+  margin: 0 auto;
+  grid-template-columns: 2fr 10fr;
+  grid-template-rows: 60px 1fr;
+  grid-gap: 10px;
+  grid-template-areas:
+  'header header'
+  'nav content';
+}
+
+header{
+  grid-area: header;
+  background-color: greenyellow;
+  img{
+    height: 100%;
+  }
+}
+
+nav{
+  grid-area: nav;
+  background-color: green;
+  a{
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+  }
+}
+
+.content{
+  grid-area: content;
+  background-color: green;
+  img{
+    width: 100%;
+    height: 200px;
+  }
+  .avatar{
+    width: 200px;
+    height: 200px;;
+  }
+}
