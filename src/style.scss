@@ -5,6 +5,7 @@
 .app-wrapper{
   display: grid;
   width: 80%;
+  height: 90vh;
   margin: 0 auto;
   grid-template-columns: 2fr 10fr;
   grid-template-rows: 60px 1fr;
@@ -25,10 +26,14 @@ header{
 nav{
   grid-area: nav;
   background-color: green;
+  padding: 15px;
   a{
     text-decoration: none;
     color: white;
     font-size: 20px;
+  }
+  a.active{
+    color: gold;
   }
 }
 
@@ -42,5 +47,42 @@ nav{
   .avatar{
     width: 200px;
     height: 200px;;
+  }
+  .item{
+    // display: grid;
+    // align-items: center;
+    img{
+      border-radius: 100%;
+      width: 50px;
+      height: auto;
+    }
+  }
+  .MyPosts, .ProfileInfo .avatar{
+    padding: 10px;
+  }
+}
+
+.dialogs{
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  .dialogs-items{
+    padding: 10px;
+    background-color: rgb(0, 66, 66);
+    .dialog{
+      a{
+        text-decoration: none;
+        color: white;
+      }
+    }
+    .dialog .active{
+      color: gold;
+    }
+  }
+  
+  .messages{
+    background-color: azure;
+    padding: 10px;
+    .message{
+    }
   }
 }
