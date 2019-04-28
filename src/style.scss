@@ -35,6 +35,24 @@ nav{
   a.active{
     color: gold;
   }
+  .friends{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-column-gap: 10px;
+    a{
+      color: white;
+      grid-column: 1/5;
+    }
+    div{
+      h4{
+        text-align: center;
+        margin: 0;
+      }
+      img{
+        width: 100%;
+      }
+    }
+  }
 }
 
 .content{

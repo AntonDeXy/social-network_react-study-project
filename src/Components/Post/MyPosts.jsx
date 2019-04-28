@@ -9,7 +9,7 @@ const MyPosts = props => {
       <div>
         <textarea></textarea>
         <button>Add post</button>
-        <button>Remove</button>
+        {/* <button>Remove</button> */}
       </div>
       {props.posts.map(post => <Post message={post.message} likeCount={post.likes} />)}
     </div>

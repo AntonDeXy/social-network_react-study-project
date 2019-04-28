@@ -6,13 +6,17 @@ import Dialogs from './Components/Dialogs/Dialogs'
 import {Route, BrowserRouter, Link} from 'react-router-dom'
 
 function App(props) {
+  debugger
   return (    
     <BrowserRouter>
     <div className='app-wrapper'>
       <Header />
-      <SideBar />      
-      <Route path='/dialogs' render={ () => <Dialogs messages={props.messages} dialogs={props.dialogs} /> }/>
-      <Route path='/profile' render={ () => <Profile posts={props.posts} /> }/>
+      <SideBar friends={props.state.profilePage.friends} />      
+      <Route path='/dialogs' render={ () =><Dialogs
+        messages={props.state.messagesPage.messages}
+        dialogs={props.state.messagesPage.dialogs} /> }/>
+      <Route path='/profile' render={ () => <Profile
+        posts={props.state.profilePage.posts} /> }/>
     </div>
     </BrowserRouter>
   );
