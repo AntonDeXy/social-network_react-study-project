@@ -2,7 +2,8 @@ import React from 'react'
 import {NavLink} from 'react-router-dom'
 import FrienSideItem from './FriendSideItem'
 
-const SideBar = props => (
+const SideBar = props => {
+  return(
   <nav>
     <div>
       <NavLink to='/profile'>Profile</NavLink>
@@ -24,6 +25,7 @@ const SideBar = props => (
         img={friend.img}/> )}
     </div>
   </nav>
-)
+  )
+}
 
 export default SideBar
