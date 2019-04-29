@@ -13,10 +13,16 @@ function App(props) {
       <Header />
       <SideBar friends={props.state.profilePage.friends} />      
       <Route path='/dialogs' render={ () =><Dialogs
+        messageValue={props.state.messagesPage.newMessageText}
+        updateMessageText={props.updateNewMessageText}
+        newMessageText={props.addMessage}
         messages={props.state.messagesPage.messages}
         dialogs={props.state.messagesPage.dialogs} /> }/>
       <Route path='/profile' render={ () => <Profile
-        posts={props.state.profilePage.posts} /> }/>
+        posts={props.state.profilePage.posts}
+        updateNewPostText={props.updateNewPostText}
+        newPostText={props.state.profilePage.newPostText}
+        addPost={props.addPost} /> }/>
     </div>
     </BrowserRouter>
   );
