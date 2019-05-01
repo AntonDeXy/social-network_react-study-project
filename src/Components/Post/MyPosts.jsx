@@ -4,12 +4,12 @@ import Post from './Post'
 const MyPosts = props => {
 
   let addPost = () => {
-    props.addPost()
+    props.dispatch({ type: 'ADD-POST' })
   }
 
   let OnPostChange = () => {
     let text = newPostElement.current.value
-    props.updateNewPostText(text)  
+    props.dispatch( {type: 'UPDATE-NEW-POST-TEXT', newText: text} )  
   }
 
   let newPostElement = React.createRef()

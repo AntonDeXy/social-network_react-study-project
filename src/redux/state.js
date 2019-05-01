@@ -35,22 +35,6 @@ let store = {
   _rerenderEntrireTree(){
     console.log('state changed')
   },
-
-  addPost() {
-    let newPost = {
-      id: 5,
-      message: this._state.profilePage.newPostText,
-      likes: 0
-    }
-    this._state.profilePage.posts.push(newPost)
-    this._state.profilePage.newPostText = ''
-    this._rerenderEntrireTree()
-  },
-  
-  updateNewPostText(newPost) {
-    this._state.profilePage.newPostText = (newPost)
-    this._rerenderEntrireTree()
-  },
   
   addMessage() {
     let newMessage = {
@@ -69,6 +53,23 @@ let store = {
   subscribe(observer) {
     this._rerenderEntrireTree = observer
   },
+  
+  dispatch(action){
+    if (action.type === 'ADD-POST'){
+      debugger
+      let newPost = {
+        id: 5,
+        message: this._state.profilePage.newPostText,
+        likes: 0
+      }
+      this._state.profilePage.posts.push(newPost)
+      this._state.profilePage.newPostText = ''
+      this._rerenderEntrireTree()
+    } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+      this._state.profilePage.newPostText = action.newText
+      this._rerenderEntrireTree()
+    }
+  }
 }
 
 
