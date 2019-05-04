@@ -1,18 +1,21 @@
 import React from 'react'
-import {NavLink, Router} from 'react-router-dom'
 import DialogItem from './DialogItem'
 import Message from './Message'
+import { sendMessageText, updateNewMessageText } from '../../redux/dialogsReducer';
 
 const Dialogs = props => {
-  
+  debugger
 
-  const sendMessage = () => {
-    props.newMessageText()
+  let state = props.dialogsPage
+
+  let sendMessage = () => {
+    props.sendMessageText()
   }
 
-  const onMessageChange = () => {
-    let text = messageRef.current.value
-    props.updateMessageText(text)
+  let onMessageChange = () => {
+    let newMessage = messageRef.current.value
+    props.updateNewMessage(newMessage)
+    // props.store.dispatch (updateNewMessageText(newMessage))
   }
 
   let messageRef = React.createRef()
@@ -21,12 +24,12 @@ const Dialogs = props => {
     <div className="dialogs">
       {/* Dialogs */}
       <div className="dialogs-items">
-        {props.dialogs.map ( dialog => <DialogItem name={dialog.name} id={dialog.id} />)}
+        {state.dialogs.map ( dialog => <DialogItem name={dialog.name} id={dialog.id} />)}
       </div>
       <div className="messages">
-        {props.messages.map ( message => <Message message={message}/>)}
+        {state.messages.map ( message => <Message message={message}/>)}
         <div className="enterText">
-          <textarea ref={messageRef} onChange={onMessageChange} value={props.messageValue} ></textarea>
+          <textarea ref={messageRef} onChange={onMessageChange} value={state.newMessageText} ></textarea>
           <button onClick={sendMessage}>Send message</button>      
         </div>
       </div>

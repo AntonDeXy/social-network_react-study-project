@@ -3,6 +3,7 @@ import {NavLink} from 'react-router-dom'
 import FrienSideItem from './FriendSideItem'
 
 const SideBar = props => {
+  // debugger
   return(
   <nav>
     <div>
