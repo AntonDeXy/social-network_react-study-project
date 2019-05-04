@@ -68,11 +68,26 @@ let store = {
     } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
       this._state.profilePage.newPostText = action.newText
       this._rerenderEntrireTree()
+    } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+      this._state.profilePage.newPostText = action.newText
+      this._rerenderEntrireTree()
     }
   }
 }
 
 
+export const addPostActionCreator = () => {
+  return {
+    type: 'ADD-POST'
+  }
+}
+
+export const updateNewPostTextActionCreator = (text) => {
+  return {
+    type: 'UPDATE-NEW-POST-TEXT',
+    newText: text
+  }
+}
 
 window.store = store
 
