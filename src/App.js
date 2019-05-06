@@ -11,13 +11,13 @@ function App(props) {
     <BrowserRouter>
     <div className='app-wrapper'>
       <Header />
-      <SideBar friends={props.state.profileReducer.friends} />      
+      <SideBar />      
       <Route path='/dialogs' render={ () =><DialogsContainer
-        store = {props.store}
+        // store = {props.store}
       />
         }/>
       <Route path='/profile' render={ () => <Profile
-        store = {props.store}
+        // store = {props.store}
         // profilePage={props.state.profileReducer}
         // dispatch={props.dispatch}
          />
