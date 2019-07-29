@@ -15,7 +15,6 @@ const Dialogs = props => {
   let onMessageChange = () => {
     let newMessage = messageRef.current.value
     props.updateNewMessage(newMessage)
-    // props.store.dispatch (updateNewMessageText(newMessage))
   }
 
   let messageRef = React.createRef()

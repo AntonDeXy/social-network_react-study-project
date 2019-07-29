@@ -12,7 +12,7 @@ function App(props) {
     <div className='app-wrapper'>
       <Header />
       <SideBar />      
-      <Route path='/dialogs' render={ () =><DialogsContainer
+      <Route path='/dialogs' render={ () => <DialogsContainer
         // store = {props.store}
       />
         }/>

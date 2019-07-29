@@ -4,7 +4,6 @@ import FrienSideItem from './FriendSideItem'
 import StoreContext from '../StoreContext';
 
 const SideBar = () => {
-  debugger
   return <StoreContext.Consumer>
     {store => {
       let state = store.getState()

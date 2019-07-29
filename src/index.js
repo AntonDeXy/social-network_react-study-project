@@ -1,18 +1,18 @@
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from './serviceWorker'
 import store from './redux/redux-store'
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './style.scss';
-import App from './App';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './style.scss'
+import App from './App'
 import {BrowserRouter} from 'react-router-dom'
-import StoreContext from './StoreContext';
+import {Provider} from 'react-redux'
 
 let rerenderEntrireTree = (state) =>{
   ReactDOM.render(
     <BrowserRouter>
-      <StoreContext.Provider value={store} >
+      <Provider store={store} >
         <App />
-      </StoreContext.Provider>
+      </Provider>
     </BrowserRouter>,document.getElementById('root'));
 }
 
