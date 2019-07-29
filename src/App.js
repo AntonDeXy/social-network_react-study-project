@@ -1,9 +1,8 @@
 import React from 'react'
 import Header from './Components/Header'
-import SideBar from './Components/SideBar'
+import SideBarContainer from './Components/SideBarContainer'
 import Profile from './Components/Profile'
-import Dialogs from './Components/Dialogs/Dialogs'
-import {Route, BrowserRouter, Link} from 'react-router-dom'
+import {Route, BrowserRouter} from 'react-router-dom'
 import DialogsContainer from './Components/Dialogs/DialogsContainer';
 
 function App(props) {
@@ -11,17 +10,9 @@ function App(props) {
     <BrowserRouter>
     <div className='app-wrapper'>
       <Header />
-      <SideBar />      
-      <Route path='/dialogs' render={ () => <DialogsContainer
-        // store = {props.store}
-      />
-        }/>
-      <Route path='/profile' render={ () => <Profile
-        // store = {props.store}
-        // profilePage={props.state.profileReducer}
-        // dispatch={props.dispatch}
-         />
-        }/>
+      <SideBarContainer />      
+      <Route path='/dialogs' render={ () => <DialogsContainer/>}/>
+      <Route path='/profile' render={ () => <Profile/>}/>
     </div>
     </BrowserRouter>
   );

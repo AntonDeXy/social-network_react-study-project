@@ -1,7 +1,7 @@
 import React from 'react'
 import DialogItem from './DialogItem'
 import Message from './Message'
-import { sendMessageText, updateNewMessageText } from '../../redux/dialogsReducer';
+// import { sendMessageText, updateNewMessageText } from '../../redux/dialogsReducer';
 
 const Dialogs = props => {
   debugger
