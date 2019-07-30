@@ -1,7 +1,11 @@
 *{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
+.UsersPhoto{
+  width: 100px !important;
+  height: 100px !important;
+  // width: auto;
+}
 .app-wrapper{
   display: grid;
   width: 80%;
@@ -99,8 +103,6 @@ nav{
   .messages{
     background-color: azure;
     padding: 10px;
-    .message{
-    }
     .enterText{
       display: grid;
       grid-template-columns: 50% 50%;
