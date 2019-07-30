@@ -1,22 +1,22 @@
 import React from 'react'
-
+import * as axios from 'axios'
+import userPhoto from '../../imgs/user.png'
 const Users = (props) => {
-  debugger
-
   if(props.users.length === 0){
-    props.setUsers([
-      { id: 1, photoUrl: 'https://i.citrus.ua/imgcache/size_800/uploads/shop/b/b/bbc42ecec20ed2c885ab70204c37d2e7.jpg',followed: false, FullName: 'Dmitry', status: 'I`m a boss', location: {city: 'Minsk', country: 'Belarus'} },
-      { id: 2, photoUrl: 'https://i.citrus.ua/imgcache/size_800/uploads/shop/b/b/bbc42ecec20ed2c885ab70204c37d2e7.jpg', followed: true, FullName: 'Sasha', status: 'I`m a boss too', location: {city: 'Moscow', country: 'Russian'} },
-      { id: 3, photoUrl:'https://i.citrus.ua/imgcache/size_800/uploads/shop/b/b/bbc42ecec20ed2c885ab70204c37d2e7.jpg', followed: false, FullName: 'Andrew', status: 'I`m a boss too', location: {city: 'Kyiv', country: 'Ukraine'} },
-    ])
+    axios
+    .get("https://social-network.samuraijs.com/api/1.0/users")
+    .then(response => {
+      props.setUsers(response.data.items)
+    })
   }
+    debugger
   return(
     <div className='content'>
       {props.users.map (u => 
         <div key={u.id}  >
           <span>
             <div>
-              <img src={u.photoUrl} className='UsersPhoto' alt='ava'
+              <img src={u.photos.small != null ? u.photos.small : userPhoto } className='UsersPhoto' alt='ava'
               />
             </div>
             <div>
@@ -28,12 +28,12 @@ const Users = (props) => {
           </span>
           <span>
             <span>
-              <div>{u.fullName}</div>
+              <div>{u.name}</div>
               <div>{u.status}</div>
             </span>
             <span>
-              <div>{u.location.country}</div>
-              <div>{u.location.city}</div>
+              <div>{"u.location.country"}</div>
+              <div>{"u.location.city"}</div>
             </span>
           </span>
         </div>  
