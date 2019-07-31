@@ -12,6 +12,9 @@ return (
         <NavLink to='/dialogs'>Messages</NavLink>
       </div>
       <div>
+        <NavLink to='/users'>Users</NavLink>
+      </div>
+      <div>
         <NavLink to='#'>Music</NavLink>
       </div>
       <div>

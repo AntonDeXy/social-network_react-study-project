@@ -4,8 +4,6 @@ import Message from './Message'
 // import { sendMessageText, updateNewMessageText } from '../../redux/dialogsReducer';
 
 const Dialogs = props => {
-  debugger
-
   let state = props.dialogsPage
 
   let sendMessage = () => {
