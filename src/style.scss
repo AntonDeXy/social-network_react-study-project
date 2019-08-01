@@ -84,6 +84,10 @@ nav{
   }
 }
 
+.SelectedPage{
+  font-weight: bold;
+}
+
 .dialogs{
   display: grid;
   grid-template-columns: 1fr 5fr;
