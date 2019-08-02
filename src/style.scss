@@ -59,8 +59,11 @@ nav{
   }
 }
 
-.content{
+.contentUsers{
   grid-area: content;
+}
+
+.content, .Users{
   background-color: green;
   img{
     width: 100%;
@@ -82,6 +85,12 @@ nav{
   .MyPosts, .ProfileInfo .avatar{
     padding: 10px;
   }
+}
+
+.spiner{
+  grid-column: 2;
+  grid-row: 2/3;
+  z-index: 3;
 }
 
 .SelectedPage{
