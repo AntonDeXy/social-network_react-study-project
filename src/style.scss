@@ -70,8 +70,14 @@ nav{
     height: 200px;
   }
   .avatar{
-    width: 200px;
-    height: 200px;;
+    display: grid;
+    width: 100%;
+    height: auto;
+    grid-gap: 10px;
+    grid-template-columns: auto 1fr;
+    img{
+      width: auto;
+    }
   }
   .item{
     // display: grid;

@@ -4,6 +4,7 @@ import * as axios from 'axios'
 import { setUsers, unfollow, follow, setCurrentPage, setTotalUsersCount, toggleIsFetching} from '../../redux/usersReduces';
 import Users from './Users'
 import Preloader from '../preloader' 
+
 class UsersContainer extends React.Component{
   componentDidMount() {
     this.props.toggleIsFetching(true)
@@ -57,5 +58,4 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, 
-  {follow,unfollow,setUsers,setCurrentPage,setTotalUsersCount,toggleIsFetching})
-  (UsersContainer)
+  {follow,unfollow,setUsers,setCurrentPage,setTotalUsersCount,toggleIsFetching})(UsersContainer)
