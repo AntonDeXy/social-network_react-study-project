@@ -1,7 +1,6 @@
 import React from 'react'
 import Preloader from './preloader';
 import { NavLink } from 'react-router-dom';
-import ProfileContactItem from './ProfileContactItem'
 
 const ProfileInfo = (props) => {
   if(!props.profile){
