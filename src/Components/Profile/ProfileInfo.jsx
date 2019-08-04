@@ -1,5 +1,5 @@
 import React from 'react'
-import Preloader from './preloader';
+import Preloader from '../preloader';
 import { NavLink } from 'react-router-dom';
 
 const ProfileInfo = (props) => {
