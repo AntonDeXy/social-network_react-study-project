@@ -1,5 +1,4 @@
 import { usersAPI } from '../API/Api';
-import { followSucces } from './usersReduces';
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'

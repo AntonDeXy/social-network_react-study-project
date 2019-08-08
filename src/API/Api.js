@@ -14,7 +14,7 @@ export const usersAPI = {
       .then(response => response.data)
   },
   follow(userId) {
-    return instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`)
+    return instance.post(`follow/${userId}`)
   },
   unfollow(userId) {
     return instance.delete(`follow/${userId}`)
@@ -25,5 +25,11 @@ export const profileAPI = {
   getProfile(userId = 2) {
     return instance.get(`profile/` + userId)
       .then(response => response.data)
+  }
+}
+
+export const authAPI = {
+  getUserInfo() {
+    return instance.get(`auth/me`)
   }
 }
