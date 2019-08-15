@@ -1,6 +1,7 @@
 import React from 'react'
 import Preloader from '../preloader';
 import { NavLink } from 'react-router-dom';
+import ProfileStatus from './ProfileStatus';
 
 const ProfileInfo = (props) => {
   if(!props.profile){
@@ -10,11 +11,12 @@ const ProfileInfo = (props) => {
   let lookForJob = props.profile.lookingForAJob
   return(
   <div className="ProfileInfo">
-    <div>
+    {/* <div>
       <img src="https://html5box.com/html5lightbox/images/skynight.jpg" alt="" />
-    </div>
+    </div> */}
     <div className='avatar'>
       <img src={props.profile.photos.large} alt="" />
+      <ProfileStatus status={"what's up"} />
       <div className='UserInfo'>
         <h3>Name: {props.profile.fullName}</h3>
         <h3>Про меня: {props.profile.aboutMe}</h3>
