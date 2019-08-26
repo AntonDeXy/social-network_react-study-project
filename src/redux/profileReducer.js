@@ -2,6 +2,7 @@ import { profileAPI } from '../API/Api'
 const ADD_POST = 'ADD_POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
+const SET_STATUS = 'SET_STATUS'
 
 let initialState = {
   posts: [
@@ -15,7 +16,8 @@ let initialState = {
     { id: 3, name: "Sasha", img: 'https://www.inbenta.com/wp-content/uploads/2016/11/7396.jpg' },
   ],
   newPostText: 'Enter text',
-  profile: null
+  profile: null,
+  status: ""
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -42,6 +44,9 @@ const profileReducer = (state = initialState, action) => {
     case SET_USER_PROFILE: {
       return { ...state, profile: action.profile }
     }
+    case SET_STATUS: {
+      return{ ...state,  status: action.status}
+    }
     default:
       return state
   }
@@ -50,6 +55,7 @@ const profileReducer = (state = initialState, action) => {
 export const addPost = () => ({ type: ADD_POST })
 export const updateNewPostText = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text })
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
+export const setStatus = (status) => ({ type: SET_STATUS, status })
 
 // thunk
 export const getUserProfile = (userId) => {
@@ -58,7 +64,25 @@ export const getUserProfile = (userId) => {
       dispatch(setUserProfile(data))
     })
   }
+}
 
+export const getStatus = (userId) => {
+  return (dispatch) => {
+    profileAPI.getStatus(userId).then(data => {
+      dispatch(setStatus(data))
+    })
+  }
+}
+
+export const updateStatus = (status) => {
+  debugger
+  return (dispatch) => {
+    profileAPI.updateStatus(status).then(data => {
+      if (data.responseCode === 0){
+        dispatch(setStatus(status))
+      }
+    })
+  }
 }
 
 export default profileReducer
