@@ -15,7 +15,7 @@ let initialState = {
     { id: 2, name: "Vlad", img: 'https://www.inbenta.com/wp-content/uploads/2016/11/7396.jpg' },
     { id: 3, name: "Sasha", img: 'https://www.inbenta.com/wp-content/uploads/2016/11/7396.jpg' },
   ],
-  newPostText: 'Enter text',
+  newPostText: '',
   profile: null,
   status: ""
 }
