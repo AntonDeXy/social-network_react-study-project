@@ -14,6 +14,8 @@ const LoginForm = (props) => (
       type="password" validate={[required]} /></div>
     <div><Field component={Input} name={'rememberMe'}
       type="checkbox" />remember me</div>
+      {props.error && <div className='formSummatyError'>{props.error}</div>}
+    
     <div><button>Login</button></div>
   </form>
 )
