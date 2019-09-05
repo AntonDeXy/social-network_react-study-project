@@ -1,12 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { unfollow, follow, setCurrentPage } from '../../redux/usersReduces';
+import { unfollow, follow, setCurrentPage } from '../../redux/usersReduces'
 import Users from './Users'
 import Preloader from '../preloader' 
-import { toggleFollowingProgress, requestUsers } from './../../redux/usersReduces';
-import { getUsers,getPageSize, getCurrentPage,getTotalUsersCount,getIsFetching, getFollowingInProgress } from './../../redux/usersSelectors';
-import { withAuthRedirect } from '../../hoc/withAuthRedirect';
-import { compose } from 'redux';
+import { toggleFollowingProgress, requestUsers } from './../../redux/usersReduces'
+import { getUsers,getPageSize, getCurrentPage,getTotalUsersCount,getIsFetching, getFollowingInProgress } from './../../redux/usersSelectors'
+import { withAuthRedirect } from '../../hoc/withAuthRedirect'
+import { compose } from 'redux'
 
 class UsersContainer extends React.Component{
   componentDidMount() {
