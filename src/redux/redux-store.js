@@ -6,6 +6,7 @@ import authReducer from './authReducer'
 import thunkMiddleware from "redux-thunk"
 import appReducer from './appReducer';
 import { reducer as formReducer } from 'redux-form'
+import compose from './../Components/SideBarContainer';
 
 let reducers = combineReducers({
   profileReducer: profileReducer,
@@ -16,8 +17,11 @@ let reducers = combineReducers({
   app: appReducer
 })
 
-let store = createStore(reducers, applyMiddleware(thunkMiddleware))
 
-window.store = store
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const store = createStore(reducers, composeEnhancers
+  (applyMiddleware(thunkMiddleware))
+  );
 
 export default store
