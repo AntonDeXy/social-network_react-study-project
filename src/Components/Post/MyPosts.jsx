@@ -9,7 +9,8 @@ const maxLenght10 = maxLenghtCreator(10)
 const AddNewPostForm = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
-      <Field name='newPostText' component={Textarea} placeholder={"Post message"} validate={[required, maxLenght10]} />
+      <Field name='newPostText' component={Textarea} placeholder={"Post message"}
+      validate={[required, maxLenght10]} />
       <button>Add post</button>
     </form>
   )
@@ -18,14 +19,15 @@ const AddNewPostForm = (props) => {
 // but it works good withouth React.memo
 const MyPosts = React.memo(props => {
     let onAddPost = (values) => {
+      debugger
       props.addPost(values.newPostText)
     }
-  
+    let reversedPosts = [...props.posts].reverse()
     return (
       <div className='MyPosts'>
         <h3>My posts</h3>
         <AddNewPostFormRedux onSubmit={onAddPost} />
-        {props.posts.map(post => <Post message={post.message} likeCount={post.likes} />)}
+        {reversedPosts.map(post => <Post message={post.message} likeCount={post.likes} />)}
       </div>
     )
 })

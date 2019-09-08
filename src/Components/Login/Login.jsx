@@ -1,21 +1,17 @@
 import React from 'react'
 import { reduxForm, Field } from 'redux-form'
-import { Input } from '../common/formControls/FormsControls'
+import { Input, createField } from '../common/formControls/FormsControls'
 import { required } from './../../utils/validators/validators'
 import { connect } from 'react-redux'
 import { login } from './../../redux/authReducer'
 import { Redirect } from 'react-router-dom';
 
-const LoginForm = (props) => (
-  <form action="" onSubmit={props.handleSubmit}>
-    <div><Field component={Input} name={'email'} placeholder={'Email'}
-      type="text" validate={[required]} /></div>
-    <div><Field component={Input} name={'password'} placeholder={'Password'}
-      type="password" validate={[required]} /></div>
-    <div><Field component={Input} name={'rememberMe'}
-      type="checkbox" />remember me</div>
-      {props.error && <div className='formSummatyError'>{props.error}</div>}
-    
+const LoginForm = ({ handleSubmit, error }) => (
+  <form action="" onSubmit={handleSubmit}>
+    {createField('Email', 'email', [required], Input, 'text')}
+    {createField('Password', 'password', [required], Input, 'password')}
+    {createField('', 'rememberMe', [], Input, 'checkbox', 'rememberMe')}
+    {error && <div className='formSummatyError'>{error}</div>}
     <div><button>Login</button></div>
   </form>
 )
@@ -29,8 +25,8 @@ const Login = (props) => {
     props.login(formData.email, formData.password, formData.rememberMe)
   }
 
-  if(props.isAuth) {
-    return <Redirect to={"/profile"}/>
+  if (props.isAuth) {
+    return <Redirect to={"/profile"} />
   }
 
   return <div className='content'>
@@ -41,4 +37,4 @@ const Login = (props) => {
 const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth
 })
-export default connect(mapStateToProps, {login})(Login)
+export default connect(mapStateToProps, { login })(Login)
