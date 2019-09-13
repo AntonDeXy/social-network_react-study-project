@@ -12,7 +12,7 @@ const Users = ({ currentPage, onPageChanged, totalUsersCount, pageSize, users, .
 
   return (
     <div className='User'>
-      <Paginator currentPage={currentPage} onPageChanged={onPageChanged} pageSize={pageSize} totalUsersCount={totalUsersCount} />
+      <Paginator currentPage={currentPage} onPageChanged={onPageChanged} pageSize={pageSize} totalItemsCount={totalUsersCount} />
       {users.map(u =>
         <User user={u} 
         followingInProgress={props.followingInProgress} 
