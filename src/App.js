@@ -1,7 +1,7 @@
 import React from 'react'
 import HeaderContainer from './Components/Header/HeaderContainer'
 import SideBarContainer from './Components/SideBarContainer'
-import { Route, BrowserRouter, withRouter, Router } from 'react-router-dom'
+import { Route, HashRouter, withRouter, Router } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { initializeApp } from "./redux/appReducer"
@@ -48,11 +48,14 @@ let AppContainer = compose(
 
 const SamuraiJsApp = (props) => {
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <HashRouter 
+    // this will use only with BrowserRouter
+    // basename={process.env.PUBLIC_URL}
+    >
       <Provider store={store} >
         <AppContainer />
       </Provider>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 
