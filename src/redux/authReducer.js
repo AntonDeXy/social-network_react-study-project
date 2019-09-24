@@ -4,7 +4,7 @@ import { stopSubmit } from 'redux-form'
 const SET_USER_DATA = 'samurai-network/auth/SET_USER_DATA'
 
 let initialState = {
-  uderId: null,
+  userId: null,
   email: null,
   login: null,
   isAuth: false
