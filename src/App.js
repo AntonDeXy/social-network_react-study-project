@@ -1,7 +1,7 @@
 import React from 'react'
 import HeaderContainer from './Components/Header/HeaderContainer'
 import SideBarContainer from './Components/SideBarContainer'
-import { Route, HashRouter, withRouter, Router } from 'react-router-dom'
+import { Route, HashRouter, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { initializeApp } from "./redux/appReducer"
