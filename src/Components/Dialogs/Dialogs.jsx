@@ -30,18 +30,10 @@ const Dialogs = props => {
     props.sendMessageText()
   }
 
-  let onMessageChange = () => {
-    let newMessage = messageRef.current.value
-    props.updateNewMessageText(newMessage)
-  }
-
-  let messageRef = React.createRef()
-
   if (!props.isAuth) return <Redirect to={'/login'} />
 
   return (
     <div className="dialogs">
-      {/* Dialogs */}
       <div className="dialogs-items">
         {state.dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id} />)}
       </div>

@@ -46,6 +46,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-router-dom": "^5.1.7",
     "@types/redux-form": "^8.2.1",
     "gh-pages": "^2.1.1",
     "react-test-renderer": "^16.9.0"

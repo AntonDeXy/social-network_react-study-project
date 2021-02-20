@@ -1,10 +1,10 @@
-import { usersAPI } from '../API/Api';
+import { usersAPI } from '../API/Api'
 import { updateObjectInArray } from '../utils/helpers/object-helpers'
-import { PhotosType, UserType } from '../types/types'
-import { AppStateType } from './redux-store';
-import { Dispatch } from 'redux';
-import { ActionTypes } from 'redux-form';
-import { ThunkAction } from 'redux-thunk';
+import { UserType } from '../types/types'
+import { AppStateType } from './redux-store'
+import { Dispatch } from 'redux'
+import { ThunkAction } from 'redux-thunk'
+
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
@@ -55,7 +55,7 @@ const usersReducer = (state = initialState, action: AcionsTypes): InitialStateTy
         ...state,
         followingInProgress: action.isFetching
           ? [...state.followingInProgress, action.userId]
-          : state.followingInProgress.filter(id => id != action.userId)
+          : state.followingInProgress.filter(id => id !== action.userId)
       }
     }
     default:

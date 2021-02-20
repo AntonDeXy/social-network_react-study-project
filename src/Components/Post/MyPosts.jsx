@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react'
+import React from 'react'
 import Post from './Post'
 import { Field, reduxForm } from 'redux-form';
 import { required, maxLenghtCreator } from '../../utils/validators/validators';

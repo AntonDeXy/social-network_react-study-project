@@ -52,8 +52,6 @@ type getCaptchaUrlSuccessActionType = {
 export const getCaptchaUrlSuccess = (captchaUrl: string): getCaptchaUrlSuccessActionType =>
 ({ type: GET_CAPTCHA_URL_SUCCESS, payload: { captchaUrl } })
 
-
-
 // thunk
 export const getUserInfo = () => {
   return async (dispatch: any) => {

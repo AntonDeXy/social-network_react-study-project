@@ -23,7 +23,7 @@ export const usersAPI = {
 }
 
 export const profileAPI = {
-  getProfile(userId: number) {
+  getProfile(userId: number): any {
     return instance.get(`profile/` + userId)
       .then(response => response.data)
   },
@@ -31,10 +31,10 @@ export const profileAPI = {
     return instance.get(`profile/status/` + userId)
       .then(response => response.data)
   },
-  updateStatus(status: string) {
+  updateStatus(status: string): any {
     return instance.put('profile/status/', { status: status })
   },
-  savePhoto(photoFile: any) {
+  savePhoto(photoFile: any): any {
     const formData = new FormData()
     formData.append("image", photoFile)
 
@@ -44,7 +44,7 @@ export const profileAPI = {
       }
     })
   },
-  saveProfile(profile: ProfileType) {
+  saveProfile(profile: ProfileType): any {
     return instance.put('profile', profile)
   }
 }
@@ -63,12 +63,12 @@ type MeResponseType = {
   resultCode: ResultCodeEnum
   messages: Array<string>
 }
+
 type LoginResponseType = {
   data: {userId: number}
   resultCode: ResultCodeEnum | ResultCodeForCaptcha
   messages: Array<string>
 }
-
 
 export const authAPI = {
   getUserInfo() {

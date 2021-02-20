@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Preloader from "../preloader";
-import { NavLink } from "react-router-dom";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from "../../imgs/user.png";
 import UserInfoForm from "./UserInfoForm";

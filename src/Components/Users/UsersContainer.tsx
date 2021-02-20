@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { unfollow, follow, setCurrentPage } from '../../redux/usersReduces'
+import { unfollow, follow } from '../../redux/usersReducer'
 import Users from './Users'
 import Preloader from '../preloader' 
-import { toggleFollowingProgress, requestUsers } from '../../redux/usersReduces'
+import { requestUsers } from '../../redux/usersReducer'
 import { getUsers,getPageSize, getCurrentPage,getTotalUsersCount,getIsFetching, getFollowingInProgress } from '../../redux/usersSelectors'
 import { withAuthRedirect } from '../../hoc/withAuthRedirect'
 import { compose } from 'redux'

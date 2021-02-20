@@ -2,7 +2,6 @@ import React, { FC } from 'react'
 import Paginator from '../common/Paginator'
 import User from './User'
 import { UserType } from '../../types/types'
-import { follow } from '../../redux/usersReduces';
 
 type Props = {
   currentPage: number
