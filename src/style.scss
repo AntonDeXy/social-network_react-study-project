@@ -1,6 +1,7 @@
 *{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
 .UsersPhoto{
   width: 100px !important;
   height: 100px !important;
@@ -47,21 +48,28 @@ nav{
   a.active{
     color: gold;
   }
-  .friends{
+  .friends-wrapper{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-column-gap: 10px;
-    a{
+    grid-auto-flow: row;
+    gap: 10px;
+    h2 {
       color: white;
-      grid-column: 1/5;
+      // grid-column: 1/5;
     }
-    div{
-      h4{
-        text-align: center;
-        margin: 0;
-      }
-      img{
-        width: 100%;
+    .friends {
+      display: grid;
+      grid-auto-flow: column;
+      grid-template-columns: repeat(3, calc((100% - 2em) / 3));
+      gap: 1em;
+      // max-width: auto;
+      .friend{
+        h4{
+          text-align: center;
+          margin: 0;
+        }
+        img{
+          width: 100%;
+        }
       }
     }
   }
