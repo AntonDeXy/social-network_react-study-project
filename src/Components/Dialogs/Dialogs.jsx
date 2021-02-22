@@ -8,10 +8,10 @@ import { required, maxLenghtCreator } from '../../utils/validators/validators';
 
 const maxLenght50 = maxLenghtCreator(50)
 
-const AddMessageForm = (props) => {
+const AddMessageForm = ({handleSubmit}) => {
   return (
     <div className="enterText">
-      <form onSubmit={props.handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <Field component={Textarea} placeholder="Enter" name="newMessageBody"
         validate={[required, maxLenght50]} />
         <button>Send</button>
@@ -20,26 +20,23 @@ const AddMessageForm = (props) => {
   )
 }
 
-const AddMessageFormRedux = reduxForm({form: 'dialogs=add-message-form'})(AddMessageForm)
+const AddMessageFormRedux = reduxForm({form: 'dialogs-add-message-form'})(AddMessageForm)
 
+const Dialogs = ({dialogsPage, sendMessage, isAuth}) => {
+  if (!isAuth) return <Redirect to={'/login'} />
 
-const Dialogs = props => {
-  let state = props.dialogsPage
-
-  let sendMessage = () => {
-    props.sendMessageText()
+  const onSubmit = (formData: any) => {
+    sendMessage(formData.newMessageBody)
   }
-
-  if (!props.isAuth) return <Redirect to={'/login'} />
 
   return (
     <div className="dialogs">
       <div className="dialogs-items">
-        {state.dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id} />)}
+        {dialogsPage.dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id} />)}
       </div>
       <div className="messages">
-        {state.messages.map(message => <Message message={message} />)}
-        <AddMessageFormRedux onSubmit={sendMessage}/>
+        {dialogsPage.messages.map(message => <Message message={message} />)}
+        <AddMessageFormRedux onSubmit={onSubmit}/>
       </div>
     </div>
   )

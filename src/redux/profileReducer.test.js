@@ -1,4 +1,4 @@
-import profileReducer, { addPost, deletePost } from "./profileReducer"
+import profileReducer, { actions } from "./profileReducer"
 
 let state = {
   posts: [
@@ -10,7 +10,7 @@ let state = {
 
 it('new post should be incremented', () => {
   //1 test data
-  let action = addPost('test')
+  let action = actions.addPost('test')
   
   // 2 action
   let newState = profileReducer(state, action)
@@ -22,7 +22,7 @@ it('new post should be incremented', () => {
 
 it('message of new post should be correct', () => {
   //1 test data
-  let action = addPost('test')
+  let action = actions.addPost('test')
 
   // 2 action
   let newState = profileReducer(state, action)
@@ -33,7 +33,7 @@ it('message of new post should be correct', () => {
 
 it('after deleting lenght of messages should be decremented', () => {
   //1 test data
-  let action = deletePost(1)
+  let action = actions.deletePost(1)
 
   // 2 action
   let newState = profileReducer(state, action)
@@ -44,7 +44,7 @@ it('after deleting lenght of messages should be decremented', () => {
 
 it('after deleting lenght of messages shouldn`t be decremented if id is incorrect', () => {
   //1 test data
-  let action = deletePost(1000)
+  let action = actions.deletePost(1000)
 
   // 2 action
   let newState = profileReducer(state, action)

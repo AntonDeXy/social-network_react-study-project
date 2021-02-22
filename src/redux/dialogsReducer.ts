@@ -1,7 +1,5 @@
-export type InitialStateType = typeof initialState
-
-const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT'
-const SEND_MESSAGE = 'SEND-MESSAGE'
+import { FormAction, reset } from "redux-form"
+import { BaseThunkType, InferActionsTypes } from "./redux-store"
 
 type DialogType = {
   id: number,
@@ -12,7 +10,7 @@ type MessageType = {
   message: string
 }
 
-let initialState = {
+const initialState = {
   messages: [
     { message: 'Hi' },
     { message: 'How are u?' },
@@ -23,48 +21,36 @@ let initialState = {
     { id: 2, name: 'Andrey' },
     { id: 3, name: 'Vlad' },
   ] as Array<DialogType>,
-  newMessageText: 'Enter message'
 }
 
-const dialogsReducer = (state = initialState, action: any): InitialStateType => {
+const dialogsReducer = (state = initialState, action: ActionsType): InitialStateType => {
   switch (action.type) {
-    case SEND_MESSAGE:{
-      let newMessage = {
-        id: 6,
-        message: state.newMessageText
+    case 'SN/dialogs/SEND_MESSAGE':{
+      const newMessage = {
+        message: action.message
       }
-      let stateCopy = {...state}
-      stateCopy.messages = [...state.messages]
-      stateCopy.messages.push(newMessage)
-      stateCopy.newMessageText = ''
-      return stateCopy
-    }
-    case UPDATE_MESSAGE_TEXT:{
-      let stateCopy = {...state}
-      stateCopy.newMessageText = action.newMessage
-      return stateCopy
+      // let stateCopy = {...state}
+      // stateCopy.messages = [...state.messages]
+      // stateCopy.messages.push(newMessage)
+      // stateCopy.newMessageText = ''
+      return {...state, messages: [...state.messages, newMessage]}
     }
     default:
       return state
   }
 }
 
-export const sendMessageText = () => {
-  return {
-    type: SEND_MESSAGE
-  }
-}
+export const actions = {
+  sendMessage: (message: string) => ({type: 'SN/dialogs/SEND_MESSAGE', message} as const),
+}  
 
-type sendMessageCreatorActionType = {
-  type: typeof UPDATE_MESSAGE_TEXT
-  newMessage: string
-}
-
-export const updateNewMessageText = (newMessage: string): sendMessageCreatorActionType => {
-  return {
-    type: UPDATE_MESSAGE_TEXT,
-    newMessage: newMessage
-  }
+export const sendMessage = (message: string):ThunkType => async (dispatch) => {
+  dispatch(actions.sendMessage(message))
+  dispatch(reset('dialogs-add-message-form'))
 }
 
 export default dialogsReducer
+
+export type InitialStateType = typeof initialState
+type ActionsType = InferActionsTypes<typeof actions>
+type ThunkType = BaseThunkType<ActionsType | FormAction>

@@ -31,7 +31,6 @@ const LoginReduxForm = reduxForm<LoginFromValuesType, LoginFormOwnProps>({
   form: 'login'
 })(LoginForm)
 
-
 type MapStateToProps = {
   captchaUrl: string | null
   isAuth: boolean
