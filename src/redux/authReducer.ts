@@ -12,7 +12,6 @@ const initialState = {
   captchaUrl: null as string | null
 }
 
-
 const authReducer = (state = initialState, action: ActionsType): InitialStateType => {
   switch (action.type) {
     case 'SN/auth/SET_USER_DATA':

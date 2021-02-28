@@ -1,7 +1,7 @@
 import React from 'react'
 import spiner from '../imgs/spiner.svg'
 
-const Preloader = (props) => (
+const Preloader:React.FC = () => (
   <img className='spiner' src={spiner} alt='loader' />
 )
 

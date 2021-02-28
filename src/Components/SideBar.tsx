@@ -1,8 +1,13 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import { FriendsType } from '../redux/profileReducer'
 import FrienSideItem from './FriendSideItem'
 
-const SideBar = (props) => {
+type SideBarPropsType = {
+  friends: Array<FriendsType>
+}
+
+const SideBar:React.FC<SideBarPropsType> = ({friends}) => {
   return (
     <nav>
       <div>
@@ -24,7 +29,7 @@ const SideBar = (props) => {
       <div className="friends-wrapper">
         <h2>Friends</h2>
         <div className="friends">
-          {props.friends.map((friend) => (
+          {friends.map((friend) => (
             <FrienSideItem name={friend.name} img={friend.img} />
           ))}
         </div>

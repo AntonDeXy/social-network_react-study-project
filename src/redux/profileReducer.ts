@@ -13,10 +13,15 @@ const initialState = {
     { id: 1, name: "Dima", img: 'https://www.inbenta.com/wp-content/uploads/2016/11/7396.jpg' },
     { id: 2, name: "Vlad", img: 'https://www.inbenta.com/wp-content/uploads/2016/11/7396.jpg' },
     { id: 3, name: "Sasha", img: 'https://www.inbenta.com/wp-content/uploads/2016/11/7396.jpg' },
-  ],
+  ] as Array<FriendsType>,
   profile: null as ProfileType | null,
   status: "",
-  newPostText: ''
+}
+
+export type FriendsType = {
+  id: number
+  name: string
+  img: string
 }
 
 export type InitialStateType = typeof initialState
@@ -24,16 +29,14 @@ export type InitialStateType = typeof initialState
 const profileReducer = (state = initialState, action: ActionsType): InitialStateType => {
   switch (action.type) {
     case 'SN/profile/ADD_POST': {
-      debugger
-      let newPost = {
-        id: 4,
+      const newPost = {
+        id: state.posts.length,
         message: action.newPostText,
         likes: 0
       }
       return {
         ...state,
         posts: [...state.posts, newPost],
-        newPostText: ''
       }
     }
     case 'SN/profile/SET_USER_PROFILE': {
@@ -63,7 +66,7 @@ export const actions = {
 }
 
 export const getUserProfile = (userId: number):ThunkType => async (dispatch) => {
-  let data = await profileAPI.getProfile(userId)
+  const data = await profileAPI.getProfile(userId)
   dispatch(actions.setUserProfile(data))
 }
 

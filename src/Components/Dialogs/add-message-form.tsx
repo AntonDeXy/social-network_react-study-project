@@ -7,7 +7,7 @@ import { FormValuesType } from './Dialogs'
 const maxLenght50 = maxLenghtCreator(50)
 
 type AddMessageFormPropsType = {
-  onSubmit: (formDatф: FormValuesType) => void
+  onSubmit: (formData: FormValuesType) => void
 }
 
 const AddMessageForm: React.FC<InjectedFormProps<FormValuesType, AddMessageFormPropsType> & AddMessageFormPropsType> = (props) => {

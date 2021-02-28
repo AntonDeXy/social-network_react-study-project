@@ -8,7 +8,9 @@ type SavePhotiResponseDataType = {
 export const profileAPI = {
   getProfile(userId: number) {
     return instance.get(`profile/` + userId)
-      .then(res => res.data)
+      .then(res => {
+        return res.data
+      })
   },
   getStatus(userId = 2) {
     return instance.get<string>(`profile/status/` + userId)
