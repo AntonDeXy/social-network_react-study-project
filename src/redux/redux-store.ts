@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, Action } from "redux"
 import profileReducer from "./profileReducer"
 import dialogsReducer from "./dialogsReducer"
-import usersReducer from './usersReducer'
+import usersReducer from './users-reducer'
 import authReducer from './authReducer'
 import thunkMiddleware, { ThunkAction } from "redux-thunk"
 import appReducer from './appReducer'

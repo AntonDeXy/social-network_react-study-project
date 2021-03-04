@@ -30,7 +30,7 @@ const SideBar:React.FC<SideBarPropsType> = ({friends}) => {
         <h2>Friends</h2>
         <div className="friends">
           {friends.map((friend) => (
-            <FrienSideItem name={friend.name} img={friend.img} />
+            <FrienSideItem key={friend.id} name={friend.name} img={friend.img} />
           ))}
         </div>
     
