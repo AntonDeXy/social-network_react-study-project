@@ -2,10 +2,13 @@ import React, { FC } from 'react'
 import Paginator from '../common/Paginator'
 import User from './User'
 import { UserType } from '../../types/types'
+import UserSearchForm from './users-search-form'
+import { FilterType } from '../../redux/users-reducer'
 
 type Props = {
   currentPage: number
   onPageChanged: (pageNumber: number) => void
+  onFilterChanged: (filter: FilterType) => void
   totalUsersCount: number
   pageSize: number
   users: Array<UserType>
@@ -14,7 +17,7 @@ type Props = {
   follow: (userId: number) => void
 }
 
-const Users:FC<Props> = ({ currentPage, onPageChanged, totalUsersCount, pageSize, users, ...props }) => {
+const Users:FC<Props> = ({ currentPage, onPageChanged, onFilterChanged, totalUsersCount, pageSize, users, ...props }) => {
   let pagesCount = Math.ceil(totalUsersCount / pageSize)
   let pages = []
 
@@ -24,6 +27,7 @@ const Users:FC<Props> = ({ currentPage, onPageChanged, totalUsersCount, pageSize
 
   return (
     <div className='User'>
+      <UserSearchForm onFilterChanged={onFilterChanged} />
       <Paginator currentPage={currentPage} onPageChanged={onPageChanged} pageSize={pageSize} totalItemsCount={totalUsersCount} />
       {users.map(u =>
         <User user={u} 

@@ -11,7 +11,11 @@ const initialState = {
   totalUsersCount: 0,
   currentPage: 1,
   isFetching: false,
-  followingInProgress: [] as Array<number> //array of users ids
+  followingInProgress: [] as Array<number>, //array of users ids
+  filter: {
+    term: '',
+    friend: null as null | boolean
+  }
 }
 
 const usersReducer = (state = initialState, action: AcionsTypes): InitialStateType => {
@@ -47,6 +51,9 @@ const usersReducer = (state = initialState, action: AcionsTypes): InitialStateTy
           : state.followingInProgress.filter(id => id !== action.userId)
       }
     }
+    case 'SN/users/SET_FILTER': {
+      return {...state, filter: action.payload}
+    }
     default:
       return state
   }
@@ -60,14 +67,16 @@ export const actions = {
   setTotalUsersCount: (totalUsersCount: number) => ({ type: 'SN/users/SET_TOTAL_USERS_COUNT', count: totalUsersCount } as const),
   toggleIsFetching: (isFetching: boolean) => ({ type: 'SN/users/TOGGLE_IS_FETCHING', isFetching } as const),
   toggleFollowingProgress: (isFetching: boolean, userId: number) => ({ type: 'SN/users/TOGGLE_IS_FOLLOWING_PROGRESS', isFetching, userId } as const),
+  setFilter: (filter: FilterType) => ({type: 'SN/users/SET_FILTER', payload: filter } as const)
 }
 
-export const requestUsers = (currentPage: number, pageSize: number) => {
+export const requestUsers = (currentPage: number, pageSize: number, filter: FilterType): ThunkType => {
   return async (dispatch: DispatchType, getState: GetStateType) => {
     dispatch(actions.toggleIsFetching(true))
     dispatch(actions.setCurrentPage(currentPage))
+    dispatch(actions.setFilter(filter))
 
-    const data = await usersAPI.getUsers(currentPage, pageSize)
+    const data = await usersAPI.getUsers(currentPage, pageSize, filter.term, filter.friend)
     dispatch(actions.toggleIsFetching(false))
     dispatch(actions.setUsers(data.items))
     dispatch(actions.setTotalUsersCount(data.totalCount))
@@ -110,3 +119,4 @@ type DispatchType = Dispatch<AcionsTypes>
 type ThunkType = BaseThunkType<AcionsTypes>
 type AcionsTypes = InferActionsTypes<typeof actions>
 export type InitialStateType = typeof initialState
+export type FilterType = typeof initialState.filter
