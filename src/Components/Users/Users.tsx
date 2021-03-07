@@ -62,7 +62,7 @@ export const Users:FC<PropsType> = () => {
     if(currentPage > 1) query.page = String(currentPage)
 
     histrory.push({
-      pathname: '/users',
+      pathname: '/developers',
       search: queryString.stringify(query)
     })
   }, [currentPage, filter, histrory])
