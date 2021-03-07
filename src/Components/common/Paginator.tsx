@@ -21,7 +21,6 @@ const Paginator:React.FC<Props> = ({ totalItemsCount, pageSize, currentPage, onP
   let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1
   let rightPortionPageNumber = portionNumber * portionSize
 
-
   return (
     <div>
       {portionNumber > 1 &&

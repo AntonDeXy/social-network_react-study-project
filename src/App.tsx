@@ -9,19 +9,16 @@ import Preloader from './Components/preloader'
 import { Provider } from 'react-redux'
 import { withSuspense } from './hoc/withSuspense'
 import store, { AppStateType } from './redux/redux-store'
+import { UsersPage } from './Components/Users/UsersContainer'
+import { LoginPage } from './Components/Login/Login';
 
 const DialogsContainer = React.lazy (() => import ('./Components/Dialogs/DialogsContainer'))
-const UsersContainer = React.lazy (() => import ('./Components/Users/UsersContainer'))
 const ProfileContainer = React.lazy (() => import ('./Components/Profile/ProfileContainer'))
-const Login = React.lazy (() => import ('./Components/Login/Login'))
 
 type MapPropsType = ReturnType<typeof mapStateToProps>
 type DispatchPropsType = {initializeApp: () => void}
-
 const SuspendedDialogs = withSuspense(DialogsContainer)
 const SuspendedProfile = withSuspense(ProfileContainer)
-const SuspendedUsers = withSuspense(UsersContainer)
-const SuspendedLogin = withSuspense(Login)
 
 class App extends Component<MapPropsType & DispatchPropsType> {
   componentDidMount() {
@@ -40,8 +37,8 @@ class App extends Component<MapPropsType & DispatchPropsType> {
         <Switch>
           <Route exact path='/dialogs' render={() => <SuspendedDialogs />} />
           <Route path='/profile/:userId?' render={() => <SuspendedProfile />} />
-          <Route path='/users' render={() => <SuspendedUsers /> } />
-          <Route path='/login' render={() => <SuspendedLogin /> } />
+          <Route path='/users' render={() => <UsersPage pageTitle='Пользователи' /> } />
+          <Route path='/login' render={() => <LoginPage /> } />
         </Switch>
       </div>
     )

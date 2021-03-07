@@ -1,43 +1,93 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import Paginator from '../common/Paginator'
 import User from './User'
-import { UserType } from '../../types/types'
 import UserSearchForm from './users-search-form'
-import { FilterType } from '../../redux/users-reducer'
+import { FilterType, follow, requestUsers, unfollow } from '../../redux/users-reducer'
+import { useDispatch, useSelector } from 'react-redux'
+import { getCurrentPage, getFollowingInProgress, getPageSize, getTotalUsersCount, getUsers, getUsersFilter } from '../../redux/usersSelectors'
+import { useHistory } from 'react-router'
+import * as queryString from 'querystring'
 
-type Props = {
-  currentPage: number
-  onPageChanged: (pageNumber: number) => void
-  onFilterChanged: (filter: FilterType) => void
-  totalUsersCount: number
-  pageSize: number
-  users: Array<UserType>
-  followingInProgress: Array<number>
-  unfollow: (userId: number) => void
-  follow: (userId: number) => void
-}
+type PropsType = {}
 
-const Users:FC<Props> = ({ currentPage, onPageChanged, onFilterChanged, totalUsersCount, pageSize, users, ...props }) => {
-  let pagesCount = Math.ceil(totalUsersCount / pageSize)
-  let pages = []
+export const Users:FC<PropsType> = () => {
+  const users = useSelector(getUsers)
+  const totalUsersCount = useSelector(getTotalUsersCount)
+  const currentPage = useSelector(getCurrentPage)
+  const pageSize = useSelector(getPageSize)
+  const filter = useSelector(getUsersFilter)
+  const followingInProgress = useSelector(getFollowingInProgress)
 
-  for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i)
+  const dispatch = useDispatch()
+  const histrory = useHistory()
+
+  const onPageChanged = (pageNumber: number) => {
+    dispatch(requestUsers(pageNumber, pageSize, filter))
   }
+
+  const onFilterChanged = (filters: FilterType) => {
+    dispatch(requestUsers(1, pageSize, filters))
+  }
+
+  const handleFollow = (userId: number) => {
+    dispatch(follow(userId))
+  }
+
+  const handleUnfollow = (userId: number) => {
+    dispatch(unfollow(userId))
+  }
+
+  useEffect(() => {
+    const parsed: QueryStringParamsType  = queryString.parse(histrory.location.search.substr(1))
+
+    let actualPage = currentPage
+    let actualFilter = filter
+
+    if (!!parsed.page) actualPage = Number(parsed.page)
+
+    if (!!parsed.term) actualFilter = {...actualFilter, term: parsed.term}
+
+    if (!!parsed.friend) actualFilter = {...actualFilter, friend: parsed.friend === 'null' ? null : parsed.friend === 'true' ? true : false}
+
+    
+    dispatch(requestUsers(actualPage, pageSize, actualFilter))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    const query:QueryStringParamsType = {}
+
+    if(!!filter.term) query.term = filter.term
+    if(!!filter.friend) query.friend = String(filter.friend)
+    if(currentPage > 1) query.page = String(currentPage)
+
+    histrory.push({
+      pathname: '/users',
+      search: queryString.stringify(query)
+    })
+  }, [currentPage, filter, histrory])
 
   return (
     <div className='User'>
       <UserSearchForm onFilterChanged={onFilterChanged} />
-      <Paginator currentPage={currentPage} onPageChanged={onPageChanged} pageSize={pageSize} totalItemsCount={totalUsersCount} />
+      <Paginator 
+        currentPage={currentPage} onPageChanged={onPageChanged} 
+        pageSize={pageSize} totalItemsCount={totalUsersCount} 
+      />
       {users.map(u =>
         <User user={u} 
-        followingInProgress={props.followingInProgress} 
+        followingInProgress={followingInProgress} 
         key={u.id} 
-        unfollow={props.unfollow} 
-        follow={props.follow} 
+        unfollow={handleFollow} 
+        follow={handleUnfollow} 
         />
       )}
     </div>
   )
 }
-export default Users
+
+type QueryStringParamsType = {
+  term?: string
+  page?: string
+  friend?: string
+}
