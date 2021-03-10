@@ -23,7 +23,8 @@
     "redux-form": "^8.2.6",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "uuid": "^8.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -51,6 +52,7 @@
   "devDependencies": {
     "@types/react-router-dom": "^5.1.7",
     "@types/redux-form": "^8.2.1",
+    "@types/uuid": "^8.3.0",
     "gh-pages": "^2.1.1",
     "react-test-renderer": "^16.9.0"
   }

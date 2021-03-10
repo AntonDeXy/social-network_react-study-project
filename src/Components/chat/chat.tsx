@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { ChatMessageType } from '../../API/chat-api'
-import { sendMessage, startMessagesListening, stopMessagesListening } from '../../redux/chat-reducer'
-import { Messages } from './Messages'
+import { startMessagesListening, stopMessagesListening } from '../../redux/chat-reducer'
+import { AddMessageForm } from './add-message-form'
+import { Messages } from './messages'
 
 const Chat = () => {
-
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -19,53 +18,6 @@ const Chat = () => {
     <div>
       <Messages />
       <AddMessageForm />
-    </div>
-  )
-}
-
-type MessagePropsType = {
-  message: ChatMessageType
-}
-
-export const Message: React.FC<MessagePropsType> = ({ message }) => {
-  return (
-    <div>
-      <img style={{ width: '30px' }} src={message.photo} alt="" />
-      <b>{message.userName}</b>
-      <br />
-      {message.message}
-      <hr />
-    </div>
-  )
-}
-
-type AddMessageFormPropsType = {
-}
-
-const AddMessageForm: React.FC<AddMessageFormPropsType> = () => {
-  const [newMessageText, setNewMessageText] = useState('')
-
-  const dispatch = useDispatch()
-
-  const sendMessageHandler = () => {
-    if (!newMessageText) {
-      return
-    }
-    dispatch(sendMessage(newMessageText))
-    setNewMessageText('')
-  }
-
-  return (
-    <div>
-      <div>
-        <textarea
-          onChange={e => setNewMessageText(e.currentTarget.value)}
-          value={newMessageText}
-        />
-      </div>
-      <div>
-        <button disabled={false} onClick={sendMessageHandler}>send</button>
-      </div>
     </div>
   )
 }
