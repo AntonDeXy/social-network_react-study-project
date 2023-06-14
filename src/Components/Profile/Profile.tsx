@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import ProfileInfo from './ProfileInfo'
 import MyPostsContainer from '../Post/MyPostsContainer'
 import { ProfileType } from '../../types/types'
@@ -12,20 +12,18 @@ type ProfilePropsType = {
   updateStatus: (status: string) => void
 }
 
-const Profile:React.FC<ProfilePropsType> = ({
-  status, profile,
-  isOwner, savePhoto,
-  saveProfile, updateStatus
-}) => {
-  return(
-    <div className='content'>
-      <ProfileInfo 
-        saveProfile={saveProfile} savePhoto={savePhoto} 
-        isOwner={isOwner} profile={profile} 
-        status={status} updateStatus={updateStatus} />
-      <MyPostsContainer />
-    </div>
-  )
+class Profile extends Component<ProfilePropsType> {
+  render() {
+    return (
+      <div className='content'>
+        <ProfileInfo 
+          saveProfile={this.props.saveProfile} savePhoto={this.props.savePhoto} 
+          isOwner={this.props.isOwner} profile={this.props.profile} 
+          status={this.props.status} updateStatus={this.props.updateStatus} />
+        <MyPostsContainer />
+      </div>
+    );
+  }
 }
 
-export default Profile
+export default Profile;

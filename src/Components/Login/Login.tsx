@@ -1,10 +1,11 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom';
 import { InjectedFormProps, reduxForm } from 'redux-form'
+import { useDispatch, useSelector } from 'react-redux'
+
 import { Input, createField, GetStringKeys } from '../common/formControls/FormsControls'
 import { required } from './../../utils/validators/validators'
-import { useDispatch, useSelector } from 'react-redux'
 import { login } from './../../redux/authReducer'
-import { Redirect } from 'react-router-dom';
 import { AppStateType } from '../../redux/redux-store'
 
 type LoginFormOwnProps = {

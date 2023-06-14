@@ -1,12 +1,13 @@
 import React, { FC, useEffect } from 'react'
+import * as queryString from 'querystring'
+import { useHistory } from 'react-router'
+import { useDispatch, useSelector } from 'react-redux'
+
 import Paginator from '../common/Paginator'
 import User from './User'
 import UserSearchForm from './users-search-form'
 import { FilterType, follow, requestUsers, unfollow } from '../../redux/users-reducer'
-import { useDispatch, useSelector } from 'react-redux'
 import { getCurrentPage, getFollowingInProgress, getPageSize, getTotalUsersCount, getUsers, getUsersFilter } from '../../redux/usersSelectors'
-import { useHistory } from 'react-router'
-import * as queryString from 'querystring'
 
 type PropsType = {}
 

@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 type ProfileContactItemPropsType = {
   item: string
 }
 
-const ProfileContactItem: React.FC<ProfileContactItemPropsType> = ({item}) => (
-  <li>{item}</li>
-)
+class ProfileContactItem extends Component<ProfileContactItemPropsType> {
+  render() {
+    const { item } = this.props;
+    return <li>{item}</li>;
+  }
+}
 
 export default ProfileContactItem

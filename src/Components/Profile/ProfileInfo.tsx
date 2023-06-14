@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react"
+import React, { ChangeEvent, Component } from "react"
 import Preloader from "../preloader"
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks"
 import userPhoto from "../../imgs/user.png"
@@ -14,106 +14,120 @@ type ProfileInfoPropsType = {
   updateStatus: (status: string) => void
 }
 
-const ProfileInfo: React.FC<ProfileInfoPropsType> = ({
-  status, profile, isOwner,
-  savePhoto, saveProfile, updateStatus
-}) => {
-  const [editMode, setEditMode] = useState(false)
+type StateType = {
+  editMode: boolean
+}
 
-  if (!profile) {
-    return <Preloader />;
+class ProfileInfo extends Component<ProfileInfoPropsType, StateType> {
+  constructor(props: ProfileInfoPropsType) {
+    super(props);
+    this.state = {
+      editMode: false,
+    };
   }
 
-  const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+  onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
-      savePhoto(e.target.files[0]);
+      this.props.savePhoto(e.target.files[0]);
     }
   };
 
-  const onSubmit = (formData: ProfileType) => {
+  onSubmit = (formData: ProfileType) => {
     // TODO: remove then
-    saveProfile(formData).then(
-      () => setEditMode(false)
-    )
-  }
+    this.props.saveProfile(formData).then(() => {
+      this.setState({ editMode: false });
+    });
+  };
 
-  return (
-    <div className="ProfileInfo">
-      <div className="avatar">
-        {profile.photos.large ? (
-          <img src={profile.photos.large} alt="" />
-        ) : (
+  render() {
+    const { status, profile, isOwner } = this.props;
+    const { editMode } = this.state;
+
+    if (!profile) {
+      return <Preloader />;
+    }
+
+    return (
+      <div className="ProfileInfo">
+        <div className="avatar">
+          {profile.photos.large ? (
+            <img src={profile.photos.large} alt="" />
+          ) : (
             <img src={userPhoto} alt="" />
           )}
-        <div>
-          <ProfileStatusWithHooks
-            status={status}
-            updateStatus={updateStatus}
-          />
-          {editMode ? (
-            <UserInfoForm initialValues={profile} profile={profile} onSubmit={onSubmit} />
-          ) : (
+          <div>
+            <ProfileStatusWithHooks status={status} updateStatus={this.props.updateStatus} />
+            {editMode ? (
+              <UserInfoForm initialValues={profile} profile={profile} onSubmit={this.onSubmit} />
+            ) : (
               <UserInfo
                 goToEditMode={() => {
-                  setEditMode(true);
+                  this.setState({ editMode: true });
                 }}
                 profile={profile}
                 isOwner={isOwner}
               />
             )}
-        </div>
+          </div>
 
-        {isOwner && <input type={"file"} onChange={onMainPhotoSelected} />}
+          {isOwner && <input type="file" onChange={this.onMainPhotoSelected} />}
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 type ContactPropsType = {
   contactTitle: string
   contactValue: string
 }
 
-const Contact: React.FC<ContactPropsType> = ({ contactTitle, contactValue }) => {
-  return (
-    <div>
-      <b className="contactElement">{contactTitle}</b>:{contactValue}
-    </div>
-  );
-};
+class Contact extends Component<ContactPropsType> {
+  render() {
+    const { contactTitle, contactValue } = this.props;
+    return (
+      <div>
+        <b className="contactElement">{contactTitle}</b>: {contactValue}
+      </div>
+    );
+  }
+}
 
 type UserInfoPropsType = {
   profile: ProfileType
   isOwner: boolean
   goToEditMode: () => void
 }
-
-const UserInfo:React.FC<UserInfoPropsType> = ({ profile, isOwner, goToEditMode }) => {
-  return (
-    <div className="UserInfo">
-      {isOwner && <button onClick={goToEditMode}>Edit</button>}
-      <h3>Name: {profile.fullName}</h3>
-      <h3>Про меня: {profile.aboutMe}</h3>
-      {profile.lookingForAJob ? (
-        <span>В поиске работы</span>
-      ) : (
-          <span>Работу не ищу</span>
+class UserInfo extends Component<UserInfoPropsType> {
+  render() {
+    const { profile, isOwner, goToEditMode } = this.props;
+    return (
+      <div className="UserInfo">
+        {isOwner && <button onClick={goToEditMode}>Edit</button>}
+        <h3>Name: {profile.fullName}</h3>
+        <h3>About me: {profile.aboutMe}</h3>
+        {profile.lookingForAJob ? (
+          <span>Looking for a job</span>
+        ) : (
+          <span>Not looking for a job</span>
         )}
-      <h3>My professional skills: </h3> <h4>{profile.lookingForAJobDescription}</h4>
-      <h3>
-        Мои контакты:
-        {Object.keys(profile.contacts).map(key => {
-        return (
-          <Contact
-            key={key}
-            contactTitle={key}
-            contactValue={profile.contacts[key as keyof ContactsType]}
-          />
-        );
-      })}
-      </h3>
-    </div>
-  );
-};
+        <h3>My professional skills:</h3>
+        <h4>{profile.lookingForAJobDescription}</h4>
+        <h3>
+          My contacts:
+          {Object.keys(profile.contacts).map((key) => {
+            return (
+              <Contact
+                key={key}
+                contactTitle={key}
+                contactValue={profile.contacts[key as keyof ContactsType]}
+              />
+            );
+          })}
+        </h3>
+      </div>
+    );
+  }
+}
 
 export default ProfileInfo;

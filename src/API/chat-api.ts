@@ -50,7 +50,7 @@ const createConnection = () => {
   ws.addEventListener('error', errorHandler)
 }
 
-type MessagesReceivedSubscriberType = (messages: ChatMessageType[]) => void
+type MessagesReceivedSubscriberType = (messages: ChatMessageAPIType[]) => void
 type StatusChangedSubscriberType = (status: boolean) => void
 
 type EventsNames = 'messages-received' | 'status-changed'
